@@ -26,6 +26,9 @@ wheels/
 *.egg
 *.sqlite3
 migrations/
+
+# Exclude static files
+static/
 staticfiles/
 media/
 .idea/
