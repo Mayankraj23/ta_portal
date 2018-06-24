@@ -1,53 +1,41 @@
-{% extends 'frontend/dash_base.html' %}
-{% block body %}
-    <br><br>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card"
-                     style="height: 3rem;padding-top: 0.5rem;  margin-left: -1rem;  margin-right: -1rem;  margin-top: -1px;  margin-bottom: 1rem;">
-                    <center><h3 class="center" style="color: #4285F4; font-weight: 400"> Personal Details</h3>
-                    </center>
-                </div>
-                <div class="card-block" style="margin: 3rem;margin-top: 1rem">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="md-form form-lg">
-                                <input type="text" id="" class="form-control form-control-lg"
-                                       value="{{ user.get_full_name }}" readonly>
-                                <label>Name</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-
-                            <div class="md-form form-lg">
-                                <input type="text" id="" class="form-control form-control-lg"
-                                       value="{{ user.username }}" readonly>
-                                <label>Roll Number</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="md-form form-lg">
-                                <input type="text" id="" class="form-control form-control-lg"
-                                       value="{{ profile.get_program_display }}" readonly>
-                                <label>Program</label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="md-form form-lg">
-                                <input type="text" id="" class="form-control form-control-lg"
-                                       value="{{ profile.phone }}" readonly>
-                                <label>Contact</label>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
-
+{% extends 'frontend/base.html' %}
+{% block toolbar_title %}Dashboard{% endblock %}
+{% block vue_content %}
+    <v-content>
+        <v-container fluid fill-height>
+            <v-layout justify-center align-center>
+                <v-card color="white" width="50%">
+                    <v-container fluid grid-list-lg>
+                        <v-layout row>
+                            <v-flex xs12>
+                                <h3>Personal Details</h3>
+                            </v-flex>
+                        </v-layout>
+                        <v-layout row>
+                            <v-flex xs6>
+                                <div>
+                                    <div>Name</div>
+                                    <div class="headline">{{ user.get_full_name }}</div>
+                                </div>
+                                <div>
+                                    <div>Program</div>
+                                    <div class="headline">{{ profile.get_program_display }}</div>
+                                </div>
+                            </v-flex>
+                            <v-flex xs6>
+                                <div>
+                                    <div>Roll Number</div>
+                                    <div class="headline">{{ user.username }}</div>
+                                </div>
+                                <div>
+                                    <div>Phone</div>
+                                    <div class="headline">{{ profile.phone }}</div>
+                                </div>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+            </v-layout>
+        </v-container>
+    </v-content>
 {% endblock %}

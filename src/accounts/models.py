@@ -38,7 +38,7 @@ pre_save.connect(event_pre_save_receiver, sender=TeachingAssistantProfile)
 
 
 class FeedbackTeachingAssistant(models.Model):
-    MONTHES = (
+    MONTHS = (
         ('1', 'January'),
         ('2', 'February'),
         ('3', 'March'),
@@ -54,7 +54,7 @@ class FeedbackTeachingAssistant(models.Model):
     )
     approve = models.BooleanField(default=False)
     comments = models.TextField(null=True, blank=True, )
-    month = models.CharField(max_length=2, choices=MONTHES)
+    month = models.CharField(max_length=2, choices=MONTHS)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     teaching_assistant = models.ForeignKey(TeachingAssistantProfile, on_delete=models.CASCADE)
     teaching_assistant_supervisor = models.ForeignKey(TeachingAssistantSupervisorProfile, blank=True, null=True,

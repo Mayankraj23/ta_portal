@@ -1,44 +1,46 @@
 {% extends 'frontend/base.html' %}
 {% load staticfiles %}
-{% block title %} Login {% endblock %}
-{% block body %}
-    <!--Form with header-->
-    <br><br><br>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card"
-                     style="height: 3rem;padding-top: 0.5rem;  margin-left: -1rem;  margin-right: -1rem;  margin-top: -1px;  margin-bottom: 1rem;">
-                    <center><h3 class="center" style="color: #4285F4; font-weight: 400"> Teaching Assistant Login</h3>
-                    </center>
-                </div>
-                <div class="card-block" style="margin: 3rem;margin-top: 1rem">
-                    <form method="post">
-                        <!--Header-->
-                        {% csrf_token %}
-                        <div class="md-form">
-                            <i class="fa fa-envelope prefix" style="color: #4285F4  "></i>
-                            <input type="text" name="username" id="username" class="form-control">
-                            <label for="username">Username</label>
-                        </div>
-                        <div class="md-form">
-                            <i class="fa fa-lock prefix" style="font-size: 2.5rem; color: #4285F4   "></i>
-                            <input type="password" name="password" id="password" class="form-control">
-                            <label for="password">Password</label>
-                        </div>
-                        {% for error in form.non_field_errors %}
-                            <div class="red-text">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                        <div class="text-center">
-                            <button class="btn btn-primary" type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-
+{% block title %}Login | {{ block.super }}{% endblock %}
+{% block content %}
+    <v-app id="login">
+        <v-toolbar color="blue darken-3" dark app fixed>
+            <v-avatar size="32px" tile>
+                <img src="https://vuetifyjs.com/static/doc-images/logo.svg"
+                     alt="IIT-J Logo">
+            </v-avatar>
+            <v-toolbar-title class="ml-0 pl-3">
+                <span>TA Management Portal | IIT Jodhpur</span>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+        </v-toolbar>
+        <v-content>
+            <v-container fluid fill-height>
+                <v-layout align-center justify-center>
+                    <v-flex xs12 sm8 md4>
+                        <v-card class="elevation-12">
+                            <v-toolbar dark color="primary">
+                                <v-toolbar-title>Login</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-card-text>
+                                <v-form method="post">
+                                    {% csrf_token %}
+                                    <v-text-field prepend-icon="person" name="username" label="Roll Number"
+                                                  type="text"></v-text-field>
+                                    <v-text-field prepend-icon="lock" name="password" label="Password" id="password"
+                                                  type="password"></v-text-field>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <span>Forgot password?</span>
+                                        <v-btn type="submit" color="primary">Login
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-form>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+    </v-app>
 {% endblock %}

@@ -1,48 +1,17 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en" class="full-height">
 <head>
-    {% block styles %}   {% endblock %}
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
     <meta charset="UTF-8">
-
-    <title>{% block title %} {% endblock %}</title>
+    {% block styles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'css/app.301ce33e758e71512f7460d14bbfa010.css' %}" rel="stylesheet">
+    {% endblock %}
+    <title>{% block title %}TA Portal - IIT Jodhpur{% endblock %}</title>
 </head>
 
-<body style="background: white;">
-
-<div class="main-heading">
-   <div class="main-heading">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="media" style="margin-left: 1rem; margin-bottom: 1px; margin-top: 1rem;">
-                <a href="http://iitj.ac.in/" class="thumbnail pull-left">
-                    <img src="{% static 'img/iitj_logo1.png' %}" alt="IIT Jodhpur" class="logo"
-                         style="height:4rem; width:auto;">
-                </a>
-                <div class="media-body" style="margin-left:10px; margin-top: 10px;">
-                    <p class="heading"
-                       style="font-size:22px;font-weight: 500;color:black; height: 0.6rem; margin-top: -0.5rem">&nbsp;
-                        TA Management Portal
-                        <br>
-                        &nbsp; Indian Institute of Technology Jodhpur
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    <br>
-</div>
-{#<hr style="color: white;">#}
-
+<body class="{% block skin %}white-skin{% endblock %}">
+<div class="app">
 {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-dark primary-color">
         <div class="container">
@@ -80,20 +49,17 @@
         </div>
     </nav>
 {% endblock %}
-{% block body %}
+{#<hr style="color: white;">#}
+{% block content %}
 {% endblock %}
+</div>
 {% block scripts %}
     <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js"></script>
+{#    <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'js/vendor.ee2adb240f2a21b14a65.js' %}"></script>
+    <script>
+    new Vue({el: '#app'})
+    </script>
 {% endblock %}
 {% block footer %}
 {% endblock %}

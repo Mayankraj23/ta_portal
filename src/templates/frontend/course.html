@@ -1,88 +1,33 @@
-{% extends 'frontend/dash_base.html' %}
-{% load staticfiles %}
-{% block title %} Course | {{ course.slug }}  {% endblock %}
-{% block body %}
-    <br><br>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-3">
-            <div class="card"
-                 style="height: 3rem;padding-top: 0.5rem;  margin-left: -1rem;  margin-right: -1rem;  margin-top: -1px;  margin-bottom: 1rem;">
-                <center><h3 class="center" style="color: #4285F4; font-weight: 400"> Course Details</h3>
-                </center>
-            </div>
-            <div class="card-block" style="margin: 3rem;margin-top: 1rem">
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th scope="row" style="font-size: 1.3rem;">Course Name</th>
-                        <td style="font-size: 1rem"> {{ course.course_name }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" style="font-size: 1.3rem;">Course Code</th>
-                        <td style="font-size: 1rem">{{ course }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" style="font-size: 1.3rem;">Instructor</th>
-                        <td style="font-size: 1rem">{{ course.faculty.user.username }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" style="font-size: 1.3rem;">Request Approval</th>
-                        <td style="font-size: 1rem">
-                            <form method="post">
-                                {% csrf_token %}
-                                {{ form.errors }}
-                                {{ form.month }}
-                                <button class="btn btn-primary" type="submit">Request</button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-5">
-            <div class="card"
-                 style="height: 3rem;padding-top: 0.5rem;  margin-left: -1rem;  margin-right: -1rem;  margin-top: -1px;  margin-bottom: 1rem;">
-                <center><h3 class="center" style="color: #4285F4; font-weight: 400">Feedback and Approval</h3>
-                </center>
-            </div>
-
-            <div class="card-block" style="margin: 3rem;margin-top: 1rem">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col" style="font-size: 1.6rem">Month</th>
-                        <th scope="col" style="font-size: 1.6rem">Comments</th>
-                        <th scope="col" style="font-size: 1.6rem">Approval</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for feedback in feedbacks %}
-                        <tr>
-                            <th scope="row" style="font-size: 1.2rem">{{ feedback.get_month_display }}</th>
-                            <td style="font-size: 1.2rem">{{ feedback.comments }}</td>
-                            <td style="font-size: 1.2rem">
-                                {% if feedback.approve %}
-                                    Approved
-                                {% else %}
-                                    Not Approved
-                                {% endif %}
-                        </tr>
-                        </td>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col-md-1"></div>
-
-    </div>
-
-
-
-
-
-
+{% extends 'frontend/base.html' %}
+{% block title %}{{ course.course_name }} | {{ block.super }}{% endblock %}
+{% block toolbar_title %}{{ course.course_code }}{% endblock %}
+{% block vue_content %}
+    <v-content>
+        <v-container fluid fill-height>
+            <v-layout justify-center align-center>
+                <template>
+                    <v-data-table
+                            :headers='[{"text": "Month", "value": "month"}, {"text": "Comments", "value": "comments"},
+                                       {"text": "Status", "value": false}]'
+                            :items='[
+                        {% for feedback in course.feedbackteachingassistant_set.all %}{"approved": {% if feedback.approve %}true{% else %}false{% endif %},
+                            "month": "{{ feedback.get_month_display }}",
+                            "comments": "{{ feedback.comments }}"
+                        },{% endfor %}
+                ]'
+                            hide-actions
+                            class="elevation-1">
+                        <template slot="items" slot-scope="props">
+                            <td>{% templatetag openvariable %} props.item.month {% templatetag closevariable %}</td>
+                            <td>{% templatetag openvariable %} props.item.comments {% templatetag closevariable %}</td>
+                            <td>
+                                <span v-if="props.item.approve">Approved</span>
+                                <span v-else>Unapproved</span>
+                            </td>
+                        </template>
+                    </v-data-table>
+                </template>
+            </v-layout>
+        </v-container>
+    </v-content>
 {% endblock %}
