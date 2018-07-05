@@ -26,10 +26,10 @@
                         <div class="col-md-6">
                             <div class="md-form form-lg">
                                 <input type="text" name="program" class="form-control form-control-lg"
-                                       {% if form.program.value== "1" %}
-                                value="M.Tech"
+                                {% if form.program.value == "1" %}
+                                    value="M.Tech"
                                 {% elif form.program.value == "2" %}
-                                value="P.hd"
+                                    value="P.hd"
                                 {% endif %}
 
 
